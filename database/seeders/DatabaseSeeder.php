@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,6 +22,19 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        Permission::firstOrCreate([
+            'name' => 'create player notes',
+            'guard_name' => 'web',
+        ]);
+
+        $user = User::factory()->create([
+            'name' => 'Administrador',
+            'email' => 'admin@test.com',
+        ]);
+
+        $user->givePermissionTo('create player notes');
+
         $this->call([
             PlayerSeeder::class,
             PlayerNoteSeeder::class,
