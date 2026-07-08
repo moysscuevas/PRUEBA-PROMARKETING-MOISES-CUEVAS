@@ -20,8 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/players/{player}/notes', Index::class)->middleware('auth');
-
 Route::get('/players/{player}', function (Player $player) {
     return view('player', compact('player'));
 });
