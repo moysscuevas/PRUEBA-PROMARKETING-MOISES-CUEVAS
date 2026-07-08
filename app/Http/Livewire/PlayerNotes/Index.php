@@ -16,16 +16,9 @@ class Index extends Component
 
     public Collection $notes;
 
-    private PlayerNoteService $service;
-
     protected $rules = [
         'note' => 'required|string|max:500',
     ];
-
-    public function boot(PlayerNoteService $service): void
-    {
-        $this->service = $service;
-    }
 
     public function mount(Player $player): void
     {
@@ -36,16 +29,16 @@ class Index extends Component
 
     public function loadNotes(): void
     {
-        $this->notes = $this->service->getNotes($this->player->id);
+        $this->notes = app(PlayerNoteService::class)->getNotes($this->player->id);
     }
 
     public function save(): void
     {
         $this->validate();
 
-        $this->service->create([
+        app(PlayerNoteService::class)->create([
             'player_id' => $this->player->id,
-            'user_id' => Auth::id(),
+            'user_id' => auth()->id(),
             'note' => $this->note,
         ]);
 
