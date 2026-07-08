@@ -49,7 +49,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.player-notes.index');
+        return view('livewire.player-notes.index')->layout('layouts.app');
     }
 
 }

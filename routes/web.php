@@ -22,6 +22,10 @@ Route::get('/', function () {
 
 Route::get('/players/{player}/notes', Index::class)->middleware('auth');
 
+Route::get('/players/{player}', function (Player $player) {
+    return view('player', compact('player'));
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
