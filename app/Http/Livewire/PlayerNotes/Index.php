@@ -7,6 +7,7 @@ use App\Models\Player;
 use App\Services\PlayerNoteService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\View\View;
 
 class Index extends Component
 {
@@ -47,7 +48,7 @@ class Index extends Component
         $this->loadNotes();
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.player-notes.index')->layout('layouts.app');
     }
